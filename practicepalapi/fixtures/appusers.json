@@ -1,0 +1,51 @@
+[
+  {
+      "model": "practicepalapi.appusers",
+      "pk": 1,
+      "fields": {
+          "user": 1,
+          "profile_image": "sjones.jpg"
+      }
+  },
+  {
+    "model": "practicepalapi.appusers",
+    "pk": 2,
+    "fields": {
+        "user": 2,
+        "profile_image": "bmitchell.jpg"
+    }
+  },
+  {
+    "model": "practicepalapi.appusers",
+    "pk": 3,
+    "fields": {
+        "user": 3,
+        "profile_image": "achavez.jpg"
+    }
+   },
+   {
+    "model": "practicepalapi.appusers",
+    "pk": 4,
+    "fields": {
+        "user": 4,
+        "profile_image": "gparsons.jpg"
+    }
+   },
+   {
+    "model": "practicepalapi.appusers",
+    "pk": 5,
+    "fields": {
+        "user": 5,
+        "profile_image": "llai.jpg"
+    }
+   },
+   {
+    "model": "practicepalapi.appusers",
+    "pk": 6,
+    "fields": {
+        "user": 6,
+        "profile_image": "rcrowe.jpg"
+    }
+   }
+  
+]
