@@ -1,0 +1,142 @@
+[
+  {
+      "model": "practicepalapi.instruments",
+      "pk": 1,
+      "fields": {
+          "label": "Piano"
+      }
+  },
+  {
+      "model": "practicepalapi.instruments",
+      "pk": 2,
+      "fields": {
+          "label": "Guitar"
+      }
+  },
+  {
+    "model": "practicepalapi.instruments",
+    "pk": 3,
+    "fields": {
+        "label": "Piccolo"
+    }
+  },
+  {
+    "model": "practicepalapi.instruments",
+    "pk": 4,
+    "fields": {
+        "label": "Flute"
+    }
+  },
+  {
+    "model": "practicepalapi.instruments",
+    "pk": 5,
+    "fields": {
+        "label": "Oboe"
+    }
+  },
+  {
+    "model": "practicepalapi.instruments",
+    "pk": 6,
+    "fields": {
+        "label": "English Horn"
+    }
+  },
+  {
+    "model": "practicepalapi.instruments",
+    "pk": 7,
+    "fields": {
+        "label": "Clarinet"
+    }
+  },
+  {
+    "model": "practicepalapi.instruments",
+    "pk": 8,
+    "fields": {
+        "label": "Bassoon"
+    }
+  },
+  {
+    "model": "practicepalapi.instruments",
+    "pk": 9,
+    "fields": {
+        "label": "French Horn"
+    }
+  },
+  {
+    "model": "practicepalapi.instruments",
+    "pk": 10,
+    "fields": {
+        "label": "Trumpet"
+    }
+  },
+  {
+    "model": "practicepalapi.instruments",
+    "pk": 11,
+    "fields": {
+        "label": "Trombone"
+    }
+  },
+  {
+    "model": "practicepalapi.instruments",
+    "pk": 12,
+    "fields": {
+        "label": "Saxophone"
+    }
+  },
+  {
+    "model": "practicepalapi.instruments",
+    "pk": 13,
+    "fields": {
+        "label": "Tuba"
+    }
+  },
+  {
+    "model": "practicepalapi.instruments",
+    "pk": 14,
+    "fields": {
+        "label": "Harp"
+    }
+  },
+  {
+    "model": "practicepalapi.instruments",
+    "pk": 15,
+    "fields": {
+        "label": "Marimba"
+    }
+  }, 
+  {
+    "model": "practicepalapi.instruments",
+    "pk": 16,
+    "fields": {
+        "label": "Drums"
+    }
+  }, 
+  {
+    "model": "practicepalapi.instruments",
+    "pk": 17,
+    "fields": {
+        "label": "Violin"
+    }
+  }, 
+  {
+    "model": "practicepalapi.instruments",
+    "pk": 18,
+    "fields": {
+        "label": "Viola"
+    }
+  }, 
+  {
+    "model": "practicepalapi.instruments",
+    "pk": 19,
+    "fields": {
+        "label": "Cello"
+    }
+  }, 
+  {
+    "model": "practicepalapi.instruments",
+    "pk": 20,
+    "fields": {
+        "label": "Contrabass"
+    }
+  }
+]
