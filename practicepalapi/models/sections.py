@@ -11,6 +11,7 @@ class Sections(models.Model):
   pdf_page_nums = models.JSONField()
   beats = models.IntegerField(default=4)
   division = models.IntegerField(default=4)
+  tries = models.IntegerField(default=3)
   section_users = models.ManyToManyField(
     "AppUsers",
     related_name="section_users", 

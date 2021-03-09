@@ -1,6 +1,6 @@
 [
   {
-    "model": "practicepalapi.songs",
+    "model": "practicepalapi.sections",
     "pk": 1,
     "fields": {
       "song": 1,
@@ -9,11 +9,14 @@
       "target_bpm": 160,
       "is_complete": false,
       "pdf_page_nums": [1],
+      "beats": 2,
+      "division": 4,
+      "tries": 5,
       "section_users": [1,2]
     }
   },
   {
-    "model": "practicepalapi.songs",
+    "model": "practicepalapi.sections",
     "pk": 2,
     "fields": {
       "song": 3,
@@ -22,11 +25,14 @@
       "target_bpm": 93,
       "is_complete": false,
       "pdf_page_nums": [1,2],
-      "section_users": [1,2]
+      "beats": 3,
+      "division": 4,
+      "tries": 3,
+      "section_users": [5,6]
     }
   },
   {
-    "model": "practicepalapi.songs",
+    "model": "practicepalapi.sections",
     "pk": 3,
     "fields": {
       "song": 1,
@@ -35,11 +41,14 @@
       "target_bpm": 140,
       "is_complete": false,
       "pdf_page_nums": [3],
+      "beats": 2,
+      "division": 4,
+      "tries": 4,
       "section_users": [3]
     }
   },
   {
-    "model": "practicepalapi.songs",
+    "model": "practicepalapi.sections",
     "pk": 4,
     "fields": {
       "song": 2,
@@ -48,6 +57,9 @@
       "target_bpm": 120,
       "is_complete": false,
       "pdf_page_nums": [3],
+      "beats": 4,
+      "division": 4,
+      "tries": 4,
       "section_users": [4,6]
     }
   }

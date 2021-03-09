@@ -1,0 +1,69 @@
+[
+  {
+      "model": "practicepalapi.attempts",
+      "pk": 1,
+      "fields": {
+        "section": 1,
+        "bpm": 60,
+        "success": true,
+        "attempted_on": "2020-08-28T14:51:39.989Z",
+        "user": 1
+      }
+  },
+  {
+    "model": "practicepalapi.attempts",
+    "pk": 2,
+    "fields": {
+      "section": 1,
+      "bpm": 60,
+      "success": true,
+      "attempted_on": "2020-08-29T14:51:39.989Z",
+      "user": 1
+    }
+  },
+  {
+    "model": "practicepalapi.attempts",
+    "pk": 3,
+    "fields": {
+      "section": 1,
+      "bpm": 60,
+      "success": true,
+      "attempted_on": "2020-08-30T14:51:39.989Z",
+      "user": 1
+    }
+  },
+  {
+    "model": "practicepalapi.attempts",
+    "pk": 4,
+    "fields": {
+      "section": 1,
+      "bpm": 62,
+      "success": true,
+      "attempted_on": "2020-09-01T14:51:39.989Z",
+      "user": 1
+    }
+  },
+  {
+    "model": "practicepalapi.attempts",
+    "pk": 5,
+    "fields": {
+      "section": 2,
+      "bpm": 60,
+      "success": true,
+      "attempted_on": "2020-09-02T14:51:39.989Z",
+      "user": 5
+    }
+  },
+  {
+    "model": "practicepalapi.attempts",
+    "pk": 6,
+    "fields": {
+      "section": 4,
+      "bpm": 50,
+      "success": true,
+      "attempted_on": "2020-08-30T14:51:39.989Z",
+      "user": 4
+    }
+  },
+
+]
