@@ -1,0 +1,26 @@
+[
+  {
+      "model": "practicepalapi.competitions",
+      "pk": 1,
+      "fields": {
+        "created_by": 1,
+        "section": 1
+      }
+  },
+  {
+    "model": "practicepalapi.competitions",
+    "pk": 2,
+    "fields": {
+      "created_by": 5,
+      "section": 2
+    }
+  },
+  {
+    "model": "practicepalapi.competitions",
+    "pk": 3,
+    "fields": {
+      "created_by": 4,
+      "section": 4
+    }
+  }
+]

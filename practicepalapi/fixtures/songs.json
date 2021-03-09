@@ -1,0 +1,35 @@
+[
+  {
+    "model": "practicepalapi.songs",
+    "pk": 1,
+    "fields": {
+        "title": "Caprice No. 24",
+        "composer": "Niccolò Paganini",
+        "pdf": "paganini-caprice-24.pdf",
+        "instrument": 17,
+        "user": 1
+    }
+  },
+  {
+    "model": "practicepalapi.songs",
+    "pk": 2,
+    "fields": {
+        "title": "Bourrée in E minor",
+        "composer": "J.S. Bach",
+        "pdf": "bach-bouree-in-e-minor.pdf",
+        "instrument": 2,
+        "user": 2
+    }
+  },
+  {
+    "model": "practicepalapi.songs",
+    "pk": 3,
+    "fields": {
+        "title": "Blackbird",
+        "composer": "The Beatles",
+        "pdf": "beatles-blackbird.pdf",
+        "instrument": 2,
+        "user": 3
+    }
+  }
+]
