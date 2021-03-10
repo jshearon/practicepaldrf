@@ -5,7 +5,7 @@
     "fields": {
         "title": "Caprice No. 24",
         "composer": "Niccolò Paganini",
-        "pdf": "paganini-caprice-24.pdf",
+        "pdf": "pdfs/paganini-caprice-24.pdf",
         "instrument": 17,
         "user": 1
     }
@@ -16,7 +16,7 @@
     "fields": {
         "title": "Bourrée in E minor",
         "composer": "J.S. Bach",
-        "pdf": "bach-bouree-in-e-minor.pdf",
+        "pdf": "pdfs/bach-bouree-in-e-minor.pdf",
         "instrument": 2,
         "user": 2
     }
@@ -27,7 +27,7 @@
     "fields": {
         "title": "Blackbird",
         "composer": "The Beatles",
-        "pdf": "beatles-blackbird.pdf",
+        "pdf": "pdfs/beatles-blackbird.pdf",
         "instrument": 2,
         "user": 3
     }

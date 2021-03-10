@@ -46,7 +46,7 @@ class AppUsersViewSet(ModelViewSet):
       appuser = AppUsers.objects.get(pk=pk)
       serializer = AppUserSerializer(appuser, context={'request': request})
       return Response(serializer.data)
-    except appuser.DoesNotExist:
+    except AppUsers.DoesNotExist:
             return Response({"msg": "User not found"}, status=status.HTTP_404_NOT_FOUND)
     except Exception as ex:
             return HttpResponseServerError(ex)
@@ -83,7 +83,7 @@ class AppUsersViewSet(ModelViewSet):
 
         return Response({"msg": "user " + username + " has been succesfully deleted"}, status=status.HTTP_200_OK)
 
-      except appuser.DoesNotExist as ex:
+      except AppUsers.DoesNotExist as ex:
         return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
 
       except Exception as ex:

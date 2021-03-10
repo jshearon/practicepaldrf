@@ -5,3 +5,4 @@ class SongSerializer(serializers.ModelSerializer):
     class Meta:
         model = Songs
         fields = ('id', 'title', 'composer', 'pdf', 'instrument', 'user')
+        depth = 1

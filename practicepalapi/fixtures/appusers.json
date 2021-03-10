@@ -4,7 +4,7 @@
       "pk": 1,
       "fields": {
           "user": 1,
-          "profile_image": "sjones.jpg"
+          "profile_image": "userimages/sjones.jpg"
       }
   },
   {
@@ -12,7 +12,7 @@
     "pk": 2,
     "fields": {
         "user": 2,
-        "profile_image": "bmitchell.jpg"
+        "profile_image": "userimages/bmitchell.jpg"
     }
   },
   {
@@ -20,7 +20,7 @@
     "pk": 3,
     "fields": {
         "user": 3,
-        "profile_image": "achavez.jpg"
+        "profile_image": "userimages/achavez.jpg"
     }
    },
    {
@@ -28,7 +28,7 @@
     "pk": 4,
     "fields": {
         "user": 4,
-        "profile_image": "gparsons.jpg"
+        "profile_image": "userimages/gparsons.jpg"
     }
    },
    {
@@ -36,7 +36,7 @@
     "pk": 5,
     "fields": {
         "user": 5,
-        "profile_image": "llai.jpg"
+        "profile_image": "userimages/llai.jpg"
     }
    },
    {
@@ -44,7 +44,7 @@
     "pk": 6,
     "fields": {
         "user": 6,
-        "profile_image": "rcrowe.jpg"
+        "profile_image": "userimages/rcrowe.jpg"
     }
    }
   

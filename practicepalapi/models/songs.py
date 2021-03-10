@@ -15,6 +15,6 @@ class Songs(models.Model):
   user = models.ForeignKey(
     "AppUsers",
     on_delete=CASCADE,
-    related_name="appusers",
-    related_query_name="appuser"
+    related_name="songs_appusers",
+    related_query_name="songs_appuser"
   )

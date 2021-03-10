@@ -36,7 +36,7 @@ class InstrumentsViewSet(ModelViewSet):
       instrument = Instruments.objects.get(pk=pk)
       serializer = InstrumentSerializer(instrument, context={'request': request})
       return Response(serializer.data)
-    except instrument.DoesNotExist:
+    except Instruments.DoesNotExist:
             return Response({"msg": "Instrument not found"}, status=status.HTTP_404_NOT_FOUND)
     except Exception as ex:
             return HttpResponseServerError(ex)
