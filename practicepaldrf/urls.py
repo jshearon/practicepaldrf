@@ -21,9 +21,11 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from practicepalapi.views import AppUsersViewSet
+from practicepalapi.views import InstrumentsViewSet
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'users', AppUsersViewSet, 'users')
+router.register(r'instruments', InstrumentsViewSet, 'instruments')
 
 urlpatterns = [
     path('', include(router.urls)),
