@@ -20,13 +20,14 @@ from rest_framework import routers
 from django.conf import settings
 from django.conf.urls.static import static
 
-from practicepalapi.views import AppUsersViewSet, InstrumentsViewSet, SongsViewSet, SectionsViewSet
+from practicepalapi.views import AppUsersViewSet, InstrumentsViewSet, SongsViewSet, SectionsViewSet, AttemptsViewSet
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'users', AppUsersViewSet, 'users')
 router.register(r'instruments', InstrumentsViewSet, 'instruments')
 router.register(r'songs', SongsViewSet, 'songs')
 router.register(r'sections', SectionsViewSet, 'sections')
+router.register(r'attempts', AttemptsViewSet, 'attempts')
 
 urlpatterns = [
     path('', include(router.urls)),
