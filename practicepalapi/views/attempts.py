@@ -52,39 +52,15 @@ class AttemptsViewSet(ModelViewSet):
     except Exception as ex:
             return HttpResponseServerError(ex)
 
-  def update(self, request, pk=None):
-    try:
-      section = Sections.objects.get(pk=pk)
-      for key, val in request.data.items():
-        if key == 'song':
-          song = Songs.objects.get(pk=val)
-          section.song = song,
-        elif key == 'section_users':
-          section.section_users.set(val)
-        else:
-          if hasattr(section, key):
-            setattr(section, key, val)
-
-      section.save()
-
-      serializer = SectionSerializer(section)
-
-      return Response(serializer.data, status=status.HTTP_204_NO_CONTENT)
-
-    except Sections.DoesNotExist:
-        return Response({"msg": "Song does not exist"}, status=status.HTTP_404_NOT_FOUND)
-
-    except Exception as ex:
-        return HttpResponseServerError(ex)
 
   def destroy(self, request, pk=None):
       try:
-        section = Sections.objects.get(pk=pk)
-        section.delete()
+        attempt = Attempts.objects.get(pk=pk)
+        attempt.delete()
 
-        return Response({"msg": "Song has been succesfully deleted"}, status=status.HTTP_200_OK)
+        return Response({"msg": "Attempt has been succesfully deleted"}, status=status.HTTP_200_OK)
 
-      except Songs.DoesNotExist as ex:
+      except Attempts.DoesNotExist as ex:
         return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
 
       except Exception as ex:
