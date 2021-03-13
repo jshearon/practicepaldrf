@@ -28,7 +28,9 @@ class AppUsersViewSet(ModelViewSet):
       profile_image=request.data['profile_image']
     )
 
-    appuser.save()
+    serializer = AppUserSerializer(data=appuser, context={'request': request})
+    if serializer.is_valid():
+      serializer.save()
 
     token = Token.objects.create(user=new_user)
     data = json.dumps({"token": token.key, "id": new_user.id})
@@ -55,6 +57,7 @@ class AppUsersViewSet(ModelViewSet):
     try:
       appuser = AppUsers.objects.get(pk=pk)
       user = User.objects.get(pk=appuser.user.id)
+    
       appuser.profile_image = request.data['profile_image'] or appuser.profile_image
       user.username = request.data['username'] or user.username
       user.first_name = request.data['first_name'] or user.first_name

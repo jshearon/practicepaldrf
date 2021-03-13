@@ -2,6 +2,9 @@ from django.db import models
 from django.db.models.deletion import CASCADE
 
 class Competitions(models.Model):
+  class Meta:
+        unique_together = ('created_by', 'section')
+        
   created_by = models.ForeignKey(
     "AppUsers",
     on_delete=CASCADE,
