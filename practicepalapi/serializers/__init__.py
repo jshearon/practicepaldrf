@@ -1,4 +1,4 @@
-from .appusers import AppUserSerializer
+from .appusers import AppUserSerializer, UserSerializer
 from .instruments import InstrumentSerializer
 from .songs import SongSerializer
 from .sections import SectionSerializer
