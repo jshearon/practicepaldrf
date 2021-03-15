@@ -14,28 +14,6 @@ from rest_framework.parsers import FormParser, MultiPartParser, JSONParser
 from django.views.decorators.csrf import csrf_exempt
 
 class AppUsersViewSet(ModelViewSet):
-  @csrf_exempt
-  def create(self, request):
-    new_user = User.objects.create_user(
-        username=request.data['username'],
-        email=request.data['email'],
-        password=request.data['password'],
-        first_name=request.data['firstName'],
-        last_name=request.data['lastName']
-    )
-
-    appuser = AppUsers.objects.create(
-      user=new_user,
-      profile_image=request.data['profileImage']
-    )
-
-    serializer = AppUserSerializer(data=appuser, context={'request': request})
-    if serializer.is_valid():
-      serializer.save()
-
-    token = Token.objects.create(user=new_user)
-    data = json.dumps({"token": token.key, "id": new_user.id})
-    return HttpResponse(data, content_type='application/json', status=status.HTTP_201_CREATED)
 
   def list(self, request):
     users = AppUsers.objects.all()

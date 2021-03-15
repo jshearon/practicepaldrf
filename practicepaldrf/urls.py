@@ -19,7 +19,8 @@ from django.conf.urls import include, url
 from rest_framework import routers
 from django.conf import settings
 from django.conf.urls.static import static
-from practicepalapi import views
+from practicepalapi.views import *
+from practicepalapi.models import *
 
 from practicepalapi.views import AppUsersViewSet, InstrumentsViewSet, SongsViewSet, SectionsViewSet, AttemptsViewSet, CompetitionsViewSet
 
@@ -34,5 +35,6 @@ router.register(r'competitions', CompetitionsViewSet, 'attempts')
 urlpatterns = [
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
-    url(r'^register$', views.register, name='register'),
+    url(r'^register$', register),
+    url(r'^login$', login),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
