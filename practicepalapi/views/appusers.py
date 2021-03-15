@@ -70,3 +70,14 @@ class AppUsersViewSet(ModelViewSet):
 
       except Exception as ex:
         return Response({'message': ex.args[0]}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+  @action(methods=['get'], detail=False)   
+  def profile(self, request, pk=None):
+    try:
+      appuser = AppUsers.objects.get(user=request.user.id)
+      serializer = AppUserSerializer(appuser, context={'request': request})
+      return Response(serializer.data)
+    except AppUsers.DoesNotExist:
+            return Response({"msg": "User not found"}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as ex:
+            return HttpResponseServerError(ex)
