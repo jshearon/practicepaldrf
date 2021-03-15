@@ -4,3 +4,4 @@ from .songs import SongsViewSet
 from .sections import SectionsViewSet
 from .attempts import AttemptsViewSet
 from .competitions import CompetitionsViewSet
+from .auth import register, login

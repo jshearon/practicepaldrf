@@ -11,30 +11,9 @@ from practicepalapi.models import AppUsers
 from django.contrib.auth.models import User
 from practicepalapi.serializers import AppUserSerializer
 from rest_framework.parsers import FormParser, MultiPartParser, JSONParser
+from django.views.decorators.csrf import csrf_exempt
 
 class AppUsersViewSet(ModelViewSet):
-
-  def create(self, request):
-    new_user = User.objects.create_user(
-        username=request.data['username'],
-        email=request.data['email'],
-        password=request.data['password'],
-        first_name=request.data['first_name'],
-        last_name=request.data['last_name']
-    )
-
-    appuser = AppUsers.objects.create(
-      user=new_user,
-      profile_image=request.data['profile_image']
-    )
-
-    serializer = AppUserSerializer(data=appuser, context={'request': request})
-    if serializer.is_valid():
-      serializer.save()
-
-    token = Token.objects.create(user=new_user)
-    data = json.dumps({"token": token.key, "id": new_user.id})
-    return HttpResponse(data, content_type='application/json', status=status.HTTP_201_CREATED)
 
   def list(self, request):
     users = AppUsers.objects.all()
