@@ -39,7 +39,10 @@ class SectionsViewSet(ModelViewSet):
       return Response({"reason": ex.message}, status=status.HTTP_400_BAD_REQUEST)
 
   def list(self, request):
-    sections = Sections.objects.all()
+    if request.GET.get('user'):
+      sections = Sections.objects.filter(section_users__id=request.user.id)
+    else:
+      sections = Sections.objects.all()
     serializer = SectionSerializer(
       sections, many=True, context={'request': request}
     )
