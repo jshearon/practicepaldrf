@@ -40,7 +40,9 @@ class SectionsViewSet(ModelViewSet):
 
   def list(self, request):
     if request.GET.get('user'):
-      sections = Sections.objects.filter(section_users__id=request.user.id)
+      appuser = AppUsers.objects.get(user_id=request.user.id)
+      print(appuser)
+      sections = Sections.objects.filter(section_users__id=appuser.id)
     else:
       sections = Sections.objects.all()
     serializer = SectionSerializer(
