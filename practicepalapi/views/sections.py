@@ -41,7 +41,6 @@ class SectionsViewSet(ModelViewSet):
   def list(self, request):
     if request.GET.get('user'):
       appuser = AppUsers.objects.get(user_id=request.user.id)
-      print(appuser)
       sections = Sections.objects.filter(section_users__id=appuser.id)
     else:
       sections = Sections.objects.all()
