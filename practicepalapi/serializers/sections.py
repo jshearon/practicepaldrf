@@ -65,4 +65,7 @@ class SectionSerializer(serializers.ModelSerializer):
             ).count()
         if latest_bpm_count == obj.tries:
             return latest_attempt['bpm__max'] + 1
-        return latest_attempt['bpm__max']
+        elif latest_attempt['bpm__max'] is None:
+            return obj.initial_bpm
+        else:
+            return latest_attempt['bpm__max']
