@@ -31,7 +31,11 @@ class SongsViewSet(ModelViewSet):
     return Response(serializer.data, status=status.HTTP_201_CREATED)
 
   def list(self, request):
-    songs = Songs.objects.all()
+    if request.GET.get('user'):
+      appuser = AppUsers.objects.get(user_id=request.user.id)
+      songs = Songs.objects.filter(user__id=appuser.id)
+    else:
+      songs = Songs.objects.all()
     serializer = SongSerializer(
       songs, many=True, context={'request': request}
     )
