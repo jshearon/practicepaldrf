@@ -6,5 +6,6 @@
       "name": "db",
       "database": "${workspaceFolder:practicepaldrf}/db.sqlite3"
     }
-  ]
+  ],
+  "python.linting.pylintEnabled": true
 }

@@ -7,9 +7,11 @@ from rest_framework import serializers
 from rest_framework import status
 from rest_framework.decorators import action, parser_classes
 from rest_framework.authtoken.models import Token
-from practicepalapi.models import Sections, Songs, AppUsers
+from practicepalapi.models import Sections, Songs, AppUsers, Attempts
 from practicepalapi.serializers import SectionSerializer
 from rest_framework.parsers import FormParser, MultiPartParser, JSONParser
+from django.db.models import Max
+import math
 
 class SectionsViewSet(ModelViewSet):
 
