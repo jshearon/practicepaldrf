@@ -7,7 +7,7 @@ from django.db.models import Max
 import math
 
 class Sections(models.Model):
-  song = models.ForeignKey("Songs", on_delete=models.CASCADE)
+  song = models.ForeignKey("Songs", on_delete=models.CASCADE, related_name="song_sections")
   label = models.CharField(max_length=50)
   initial_bpm = models.IntegerField()
   target_bpm = models.IntegerField()
