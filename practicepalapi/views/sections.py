@@ -31,8 +31,9 @@ class SectionsViewSet(ModelViewSet):
 
     try:
       new_section.save()
-      new_section.section_users.set(request.data['section_users'])
-      new_section.save()
+      if 'section_users' in request.data:
+        new_section.section_users.set(request.data['section_users'])
+        new_section.save()
 
       serializer = SectionSerializer(new_section, context={'request': request})
       return Response(serializer.data, status=status.HTTP_201_CREATED)
