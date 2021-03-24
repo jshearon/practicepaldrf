@@ -1,4 +1,5 @@
 import json
+import re
 from django.core.exceptions import ValidationError
 from django.http import HttpResponseServerError, HttpResponse
 from rest_framework.viewsets import ModelViewSet
@@ -16,6 +17,7 @@ import math
 class SectionsViewSet(ModelViewSet):
 
   def create(self, request):
+    appuser = AppUsers.objects.get(user_id=request.user.id)
     song = Songs.objects.get(pk=request.data['song'])
     new_section = Sections.objects.create(
         song = song,
@@ -31,9 +33,8 @@ class SectionsViewSet(ModelViewSet):
 
     try:
       new_section.save()
-      if 'section_users' in request.data:
-        new_section.section_users.set(request.data['section_users'])
-        new_section.save()
+      new_section.section_users.set([appuser])
+      new_section.save()
 
       serializer = SectionSerializer(new_section, context={'request': request})
       return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -44,7 +45,7 @@ class SectionsViewSet(ModelViewSet):
   def list(self, request):
     if request.GET.get('user'):
       appuser = AppUsers.objects.get(user_id=request.user.id)
-      sections = Sections.objects.filter(section_users__id=appuser.id)
+      sections = Sections.objects.filter(section_users__id__contains=appuser.id)
     else:
       sections = Sections.objects.all()
     serializer = SectionSerializer(
@@ -64,20 +65,24 @@ class SectionsViewSet(ModelViewSet):
 
   def update(self, request, pk=None):
     try:
+      song = Songs.objects.get(pk=request.data['song'])
       section = Sections.objects.get(pk=pk)
-      for key, val in request.data.items():
-        if key == 'song':
-          song = Songs.objects.get(pk=val)
-          section.song = song,
-        elif key == 'section_users':
-          section.section_users.set(val)
-        else:
-          if hasattr(section, key):
-            setattr(section, key, val)
+      print(section, request.data)
+      section.song = song
+      section.label = request.data['label']
+      section.initial_bpm = request.data['initial_bpm']
+      section.target_bpm = request.data['target_bpm']
+      section.is_complete = False
+      section.pdf_page_nums = request.data['pdf_page_nums']
+      section.beats = request.data['beats']
+      section.division = request.data['division']
+      section.tries = request.data['tries']
+      if request.data.get("section_users"):
+        section.section_users.set(request.data['section_users'])
 
       section.save()
 
-      serializer = SectionSerializer(section)
+      serializer = SectionSerializer(section, context={"request":request})
 
       return Response(serializer.data, status=status.HTTP_204_NO_CONTENT)
 
@@ -97,5 +102,13 @@ class SectionsViewSet(ModelViewSet):
       except Songs.DoesNotExist as ex:
         return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
 
+      except Exception as ex:
+        return Response({'message': ex.args[0]}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+  
+  @action(methods=['GET'], detail=True)
+    def scoreboard(self, request:
+      try:
+        appuser = AppUsers.objects.get(user_id=request.user.id)
+        sections = Sections.objects.filter(section_users__id__contains=appuser.id))
       except Exception as ex:
         return Response({'message': ex.args[0]}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
