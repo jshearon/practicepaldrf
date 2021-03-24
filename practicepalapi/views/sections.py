@@ -1,5 +1,4 @@
 import json
-import re
 from django.core.exceptions import ValidationError
 from django.http import HttpResponseServerError, HttpResponse
 from rest_framework.viewsets import ModelViewSet
@@ -9,9 +8,10 @@ from rest_framework import status
 from rest_framework.decorators import action, parser_classes
 from rest_framework.authtoken.models import Token
 from practicepalapi.models import Sections, Songs, AppUsers, Attempts
-from practicepalapi.serializers import SectionSerializer
+from practicepalapi.serializers import SectionSerializer, ScoreboardSerializer
 from rest_framework.parsers import FormParser, MultiPartParser, JSONParser
 from django.db.models import Max
+from django.db.models.functions import Length
 import math
 
 class SectionsViewSet(ModelViewSet):
@@ -45,7 +45,7 @@ class SectionsViewSet(ModelViewSet):
   def list(self, request):
     if request.GET.get('user'):
       appuser = AppUsers.objects.get(user_id=request.user.id)
-      sections = Sections.objects.filter(section_users__id__contains=appuser.id)
+      sections = Sections.objects.filter(section_users=appuser.id)
     else:
       sections = Sections.objects.all()
     serializer = SectionSerializer(
@@ -67,7 +67,6 @@ class SectionsViewSet(ModelViewSet):
     try:
       song = Songs.objects.get(pk=request.data['song'])
       section = Sections.objects.get(pk=pk)
-      print(section, request.data)
       section.song = song
       section.label = request.data['label']
       section.initial_bpm = request.data['initial_bpm']
@@ -106,9 +105,31 @@ class SectionsViewSet(ModelViewSet):
         return Response({'message': ex.args[0]}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
   
   @action(methods=['GET'], detail=True)
-    def scoreboard(self, request:
-      try:
-        appuser = AppUsers.objects.get(user_id=request.user.id)
-        sections = Sections.objects.filter(section_users__id__contains=appuser.id))
-      except Exception as ex:
-        return Response({'message': ex.args[0]}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+  def scoreboard(self, request, pk=None):
+    try:
+      grouped_obj = []
+      appuser = AppUsers.objects.get(user_id=request.user.id)
+      sections = Sections.objects.filter(section_users = appuser)
+      for section in sections:
+        section_scoreboard = {}
+        # section_scoreboard.title = section.song.title
+        section_scoreboard.label = section.label
+        section_scoreboard.users = []
+        users = section.section_users.all()
+        for user in users:
+          add_user = {}
+          add_user.profile_image = user.profile_image
+          add_user.first_name = user.user.first_name
+          add_user.last_name = user.user.last_name
+          attempts = Attempts.objects.filter(
+              section__id=section.id,
+              success=True,
+              user=user.id 
+              )
+          latest_attempt = attempts.aggregate(Max('bpm'))
+          add_user.bmp = latest_attempt
+        section_scoreboard.users = add_user  
+        json_data = json.dumps(section_scoreboard)
+      return Response( json_data, status=status.HTTP_204_NO_CONTENT)
+    except Exception as ex:
+      return Response({'message': ex.args[0]}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
