@@ -21,7 +21,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from practicepalapi.views import *
 from practicepalapi.models import *
-from practicepalapi.views import AppUsersViewSet, InstrumentsViewSet, SongsViewSet, SectionsViewSet, AttemptsViewSet, CompetitionsViewSet, ScoreboardViewSet
+from practicepalapi.views import AppUsersViewSet, InstrumentsViewSet, SongsViewSet, SectionsViewSet, AttemptsViewSet, CompetitionsViewSet, ScoreboardViewSet, InvitationsViewSet
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'users', AppUsersViewSet, 'users')
@@ -31,6 +31,7 @@ router.register(r'sections', SectionsViewSet, 'sections')
 router.register(r'attempts', AttemptsViewSet, 'attempts')
 router.register(r'competitions', CompetitionsViewSet, 'attempts')
 router.register(r'scoreboard', ScoreboardViewSet, 'scoreboard')
+router.register(r'invitations', InvitationsViewSet, 'invitations')
 
 urlpatterns = [
     path('', include(router.urls)),

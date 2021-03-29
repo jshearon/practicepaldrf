@@ -5,3 +5,4 @@ from .sections import SectionSerializer
 from .competitions import CompetitionSerializer
 from .attempts import AttemptSerializer
 from .scoreboard import ScoreboardSerializer
+from .invitations import InvitationSerializer
