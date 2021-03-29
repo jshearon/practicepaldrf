@@ -4,3 +4,4 @@ from .songs import Songs
 from .sections import Sections
 from .competitions import Competitions
 from .attempts import Attempts
+from .invitations import Invitations
