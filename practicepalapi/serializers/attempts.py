@@ -6,3 +6,4 @@ class AttemptSerializer(serializers.ModelSerializer):
     class Meta:
         model = Attempts
         fields = ('id', 'section', 'bpm', 'success', 'attempted_on', 'user')
+    depth = 1

@@ -8,14 +8,16 @@ from rest_framework import status
 from rest_framework.decorators import action, parser_classes
 from rest_framework.authtoken.models import Token
 from practicepalapi.models import Sections, Songs, AppUsers, Attempts
-from practicepalapi.serializers import SectionSerializer
+from practicepalapi.serializers import SectionSerializer, ScoreboardSerializer
 from rest_framework.parsers import FormParser, MultiPartParser, JSONParser
 from django.db.models import Max
+from django.db.models.functions import Length
 import math
 
 class SectionsViewSet(ModelViewSet):
 
   def create(self, request):
+    appuser = AppUsers.objects.get(user_id=request.user.id)
     song = Songs.objects.get(pk=request.data['song'])
     new_section = Sections.objects.create(
         song = song,
@@ -31,9 +33,8 @@ class SectionsViewSet(ModelViewSet):
 
     try:
       new_section.save()
-      if 'section_users' in request.data:
-        new_section.section_users.set(request.data['section_users'])
-        new_section.save()
+      new_section.section_users.set([appuser])
+      new_section.save()
 
       serializer = SectionSerializer(new_section, context={'request': request})
       return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -44,7 +45,7 @@ class SectionsViewSet(ModelViewSet):
   def list(self, request):
     if request.GET.get('user'):
       appuser = AppUsers.objects.get(user_id=request.user.id)
-      sections = Sections.objects.filter(section_users__id=appuser.id)
+      sections = Sections.objects.filter(section_users=appuser.id)
     else:
       sections = Sections.objects.all()
     serializer = SectionSerializer(
@@ -64,20 +65,23 @@ class SectionsViewSet(ModelViewSet):
 
   def update(self, request, pk=None):
     try:
+      song = Songs.objects.get(pk=request.data['song'])
       section = Sections.objects.get(pk=pk)
-      for key, val in request.data.items():
-        if key == 'song':
-          song = Songs.objects.get(pk=val)
-          section.song = song,
-        elif key == 'section_users':
-          section.section_users.set(val)
-        else:
-          if hasattr(section, key):
-            setattr(section, key, val)
+      section.song = song
+      section.label = request.data['label']
+      section.initial_bpm = request.data['initial_bpm']
+      section.target_bpm = request.data['target_bpm']
+      section.is_complete = False
+      section.pdf_page_nums = request.data['pdf_page_nums']
+      section.beats = request.data['beats']
+      section.division = request.data['division']
+      section.tries = request.data['tries']
+      if request.data.get("section_users"):
+        section.section_users.set(request.data['section_users'])
 
       section.save()
 
-      serializer = SectionSerializer(section)
+      serializer = SectionSerializer(section, context={"request":request})
 
       return Response(serializer.data, status=status.HTTP_204_NO_CONTENT)
 
@@ -99,3 +103,33 @@ class SectionsViewSet(ModelViewSet):
 
       except Exception as ex:
         return Response({'message': ex.args[0]}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+  
+  @action(methods=['GET'], detail=True)
+  def scoreboard(self, request, pk=None):
+    try:
+      grouped_obj = []
+      appuser = AppUsers.objects.get(user_id=request.user.id)
+      sections = Sections.objects.filter(section_users = appuser)
+      for section in sections:
+        section_scoreboard = {}
+        # section_scoreboard.title = section.song.title
+        section_scoreboard.label = section.label
+        section_scoreboard.users = []
+        users = section.section_users.all()
+        for user in users:
+          add_user = {}
+          add_user.profile_image = user.profile_image
+          add_user.first_name = user.user.first_name
+          add_user.last_name = user.user.last_name
+          attempts = Attempts.objects.filter(
+              section__id=section.id,
+              success=True,
+              user=user.id 
+              )
+          latest_attempt = attempts.aggregate(Max('bpm'))
+          add_user.bmp = latest_attempt
+        section_scoreboard.users = add_user  
+        json_data = json.dumps(section_scoreboard)
+      return Response( json_data, status=status.HTTP_204_NO_CONTENT)
+    except Exception as ex:
+      return Response({'message': ex.args[0]}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
