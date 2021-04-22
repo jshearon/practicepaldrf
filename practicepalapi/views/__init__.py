@@ -5,5 +5,5 @@ from .sections import SectionsViewSet
 from .attempts import AttemptsViewSet
 from .competitions import CompetitionsViewSet
 from .auth import register, login
-from .userextras import ScoreboardViewSet
+from .userextras import ScoreboardViewSet, competitors
 from .invitations import InvitationsViewSet
